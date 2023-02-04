@@ -29,3 +29,4 @@ def cdn(ext):
         print(f" {Fore.RED}KeyboardInterrupt, exiting.{Style.RESET_ALL}")
         print()
         exit(1) 
+    return

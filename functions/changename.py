@@ -20,3 +20,4 @@ def change_name(directory, extension):
         except FileExistsError:
             print("The same file exists")
             continue
+    return

@@ -91,3 +91,4 @@ def search(name, extensions):
         print(f" {Fore.RED}KeyboardInterrupt, exiting.{Style.RESET_ALL}")
         print()
         sys.exit(1) 
+    return

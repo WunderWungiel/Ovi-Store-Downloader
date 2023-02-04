@@ -21,3 +21,4 @@ def help_f():
  Wayback Machine often refuses connection after many requests. You will be notified about such case with a bunch of errors, you need to retry then.
  Sorry :(""")
     print()
+    return
