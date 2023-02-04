@@ -27,7 +27,7 @@ functions = ["--cdn", "--id", "--help", "--change-name", "--search" ]
 
 if len(sys.argv) > 1:
     
-    """Script info"""
+    #Script info
 
     print()
     print(" ################################################################")
@@ -39,11 +39,11 @@ if len(sys.argv) > 1:
     print(" ################################################################")
     print()
 
-    """Get first argument from command"""
+    #Get first argument from command
     
     function = sys.argv[1]
     
-    """If argument not supported"""
+    #If argument not supported
     
     if not function in functions:
         print(" First argument is wrong! See --help.")

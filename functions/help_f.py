@@ -1,7 +1,9 @@
 from colorama import init, Fore, Style
-
+import _thread
+import time
 def help_f():
-    print(f""" {Fore.CYAN}This script works using Wayback Machine APIs and use its snapshots.{Style.RESET_ALL}
+    try:
+        print(f""" {Fore.CYAN}This script works using Wayback Machine APIs and use its snapshots.{Style.RESET_ALL}
 
  Available commands:
 
@@ -20,5 +22,7 @@ def help_f():
   
  Wayback Machine often refuses connection after many requests. You will be notified about such case with a bunch of errors, you need to retry then.
  Sorry :(""")
-    print()
-    return
+        print()
+        time.sleep(30)
+    except KeyboardInterrupt:
+        return
