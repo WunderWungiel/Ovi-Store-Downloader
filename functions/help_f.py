@@ -1,6 +1,6 @@
 from colorama import init, Fore, Style
-import _thread
 import time
+
 def help_f():
     try:
         print(f""" {Fore.CYAN}This script works using Wayback Machine APIs and use its snapshots.{Style.RESET_ALL}
@@ -24,5 +24,6 @@ def help_f():
  Sorry :(""")
         print()
         time.sleep(30)
+        return
     except KeyboardInterrupt:
         return
