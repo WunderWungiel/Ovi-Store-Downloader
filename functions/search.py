@@ -3,6 +3,7 @@ import requests
 import os
 import sys
 from colorama import init, Fore, Style
+import time
 
 def search(name, extensions):
     try:
@@ -18,8 +19,8 @@ def search(name, extensions):
             for whitespace in whitespaces:
                 apps += re.findall(f"(?i)https\:\/\/d\.ovi\.com\/p\/g\/store\/\d+\/({name}{whitespace}.*)\?", content)
         else:
-            for ext, whitespace in zip(extensions, whitespaces):
-                apps += re.findall(f"(?i)https\:\/\/d\.ovi\.com\/p\/g\/store\/\d+\/({name}{whitespace}.*\.{ext})\?", content)
+            for ext in extensions:
+                apps += re.findall(f"(?i)https\:\/\/d\.ovi\.com\/p\/g\/store\/\d+\/({name}.*\.{ext})\?", content)
         if not len(apps) > 0:
             print(f" {Fore.RED}Nothing found{Style.RESET_ALL}")
             print()
@@ -91,4 +92,5 @@ def search(name, extensions):
         print(f" {Fore.RED}KeyboardInterrupt, exiting.{Style.RESET_ALL}")
         print()
         sys.exit(1) 
+    time.sleep(10)
     return
