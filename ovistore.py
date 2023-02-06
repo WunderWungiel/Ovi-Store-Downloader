@@ -207,10 +207,9 @@ else:
                 else:
                     break
             #replace * with .*
-            name = name.replace("""*""", """.*""")
             print()
             print(" I will search for \"" + name + "\". Do you want to filter results by extension(s)? If yes, type them by comma and space. Else, press Enter.")
-            print()
+            name = name.replace("""*""", """.*""")
             extensions = input(" ")
             if extensions:
                 #make list
@@ -219,7 +218,6 @@ else:
                 extensions = [ext.replace("""*""", """.*""") for ext in extensions]
             else:
                 extensions = None
-            print()
             search(name, extensions)
         
         #cdn function

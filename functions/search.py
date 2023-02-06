@@ -16,8 +16,7 @@ def search(name, extensions):
         if " " in name:
             name = name.replace(" ", ".*")
         if extensions == None:
-            for whitespace in whitespaces:
-                apps += re.findall(f"(?i)https\:\/\/d\.ovi\.com\/p\/g\/store\/\d+\/({name}{whitespace}.*)\?", content)
+            apps += re.findall(f"(?i)https\:\/\/d\.ovi\.com\/p\/g\/store\/\d+\/({name}.*)\?", content)
         else:
             for ext in extensions:
                 apps += re.findall(f"(?i)https\:\/\/d\.ovi\.com\/p\/g\/store\/\d+\/({name}.*\.{ext})\?", content)
