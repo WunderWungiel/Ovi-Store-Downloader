@@ -1,6 +1,7 @@
 import shutil
 from zipfile import ZipFile
 import os
+import time
 
 def change_name(directory, extension):
     files = os.listdir(directory)
@@ -20,4 +21,5 @@ def change_name(directory, extension):
         except FileExistsError:
             print("The same file exists")
             continue
+        time.sleep(20)
     return
