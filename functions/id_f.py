@@ -3,6 +3,7 @@ import re
 import sys
 import os
 from colorama import init, Fore, Style
+import time
 
 def id_f(arg1, arg2):
     for i in range(arg1, arg2):
@@ -29,4 +30,5 @@ def id_f(arg1, arg2):
             sys.exit(0)
         except:
             continue 
+    time.sleep(15)
     return
