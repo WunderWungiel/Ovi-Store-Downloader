@@ -1,23 +1,45 @@
 #!/usr/bin/python3
+
+#0.0.2
+
 import re
 import sys
 import os
 import sys
 sys.path.insert(0, 'functions')
-from changename import change_name
 from id_f import id_f
 from search import search
 from cdn import cdn
 from help_f import help_f
+from changename import changename
 from colorama import init, Fore, Style
-
 #Supported extensions
 
 sup_extensions = ["sis", "sisx", "sis.dm", "sisx.dm", "deb", "jar", "wgz", "gif.dm", "mp4.dm", "3gp.dm", "3gp", "jpg"]
 
 #Supported arguments
 
-functions = ["--cdn", "--id", "--help", "--change-name", "--search" ]
+functions = ["--cdn", "--id", "--help", "--search", "--about", "--changename"]
+
+def clean():
+    os.system('clear||cls')
+    return
+def about():
+    clean()
+    print(""" 
+ ###############################################################
+ ###############################################################
+ #######                                                 #######
+ #######          Made with ❤️ by Wunder Wungiel.         #######
+ #######                                                 #######
+ #######         Website: http://wunderwungiel.pl        #######
+ #######         Telegram: https://t.me/WunderW_PL       #######
+ #######         Mail: dredlok706@yandex.com             #######
+ #######                                                 #######
+ ###############################################################
+ ###############################################################
+ """)
+    return
 
 ############################
 ############################
@@ -88,7 +110,8 @@ if len(sys.argv) > 1:
         cdn(ext)
     
     #Search argument
-
+    elif function == "--about":
+        about()
     elif function == "--search":
         if not len(sys.argv) > 2:
             print(" First argument after --search should be the filename to search.\nSecond can be list of extensions seperated by comma and space in quotation.\n* is \"any character\"")
@@ -109,19 +132,14 @@ if len(sys.argv) > 1:
     
     #change name argument, WIP
         
-    elif function == "--change-name":
+    elif function == "--changename":
         if not len(sys.argv) > 2:
             print(" First argument after --change-name should be the directory of jar files.")
             print()
             sys.exit(1)
-        if not len(sys.argv) > 3:
-            print(" First argument after --change-name should be the extension of files to change names of.")
-            print()
-            sys.exit(1)
         #Get two arguments
         directory = str(sys.argv[2])
-        extension = str(sys.argv[3])
-        change_name(directory, extension)
+        changename(directory)
     #print help
     elif function == "--help":
         help_f()
@@ -147,7 +165,8 @@ else:
         print(" #########                                                            #########")
         print(" #########     1) Download app(s) using ID  |  2) Search for apps     #########")
         print(" #########     3) Download apps with specific extension               #########")
-        print(" #########     4) Print help  |  5) Exit                              #########")
+        print(" #########     4) Name Changer  |  5) Print help  |  6) About         #########")
+        print(" #########     7) Exit                                                #########")
         print(" #########                                                            #########")
         print(" ##############################################################################")
         print()
@@ -155,9 +174,15 @@ else:
         #Selecting function
         while True:
             function = input(" ")
-            function = int(function)
-            if function not in range(1, 6):
+            if re.search("\d+", function):
+                function = int(function)
+            else:
+                print(" Option should be number from 1 - 6!\n")
+
+                continue
+            if function not in range(1, 8):
                 print("\n Wrong option! Type correct number.\n")
+                continue
             else:
                 break
         print()
@@ -171,9 +196,7 @@ else:
             while True:
                 args = input(" ")
                 if not re.search("\d+", args):
-                    print()
-                    print(" You didn't provide ID(s). Try again.")
-                    print()
+                    print("\n You didn't provide ID(s). Try again.\n")
                 else:
                     break
             #If second ID not provided
@@ -209,13 +232,15 @@ else:
             #replace * with .*
             print()
             print(" I will search for \"" + name + "\". Do you want to filter results by extension(s)? If yes, type them by comma and space. Else, press Enter.")
+            print()
             name = name.replace("""*""", """.*""")
             extensions = input(" ")
-            if extensions:
+            if extensions:  
                 #make list
                 extensions = extensions.split(", ")
                 #replace * with .* again
                 extensions = [ext.replace("""*""", """.*""") for ext in extensions]
+                print()
             else:
                 extensions = None
             search(name, extensions)
@@ -242,12 +267,27 @@ else:
             print()
             cdn(ext)
         elif function == 4:
+            print(" Picking Name Changer function. Type directory with files, which names need to be changed.")
+            print()
+            while True:
+                directory = input(" ")
+                if not os.path.exists(directory):
+                    print()
+                    print(" Invalid directory!")
+                    print()
+                    continue
+                break
+            changename(directory)
+        elif function == 5:
             #print help
             help_f()
-        elif function == 5:
+        elif function == 6:
+            about()
+            input(" Press any key to return...")
+        elif function == 7:
             #close script
             sys.exit(0)
         #clear console window
-        os.system('clear||cls')
+        clean()
 
 sys.exit(0)

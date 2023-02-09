@@ -29,5 +29,5 @@ def cdn(ext):
         print(f" {Fore.RED}KeyboardInterrupt, exiting.{Style.RESET_ALL}")
         print()
         exit(1) 
-    time.sleep(10)
+    input(" Press any key to return...")
     return

@@ -1,5 +1,4 @@
 from colorama import init, Fore, Style
-import time
 
 def help_f():
     try:
@@ -23,7 +22,7 @@ def help_f():
  Wayback Machine often refuses connection after many requests. You will be notified about such case with a bunch of errors, you need to retry then.
  Sorry :(""")
         print()
-        time.sleep(30)
+        input(" Press any key to return...")
         return
     except KeyboardInterrupt:
         return

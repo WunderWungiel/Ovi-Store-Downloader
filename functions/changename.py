@@ -1,25 +1,37 @@
-import shutil
-from zipfile import ZipFile
 import os
-import time
+from colorama import init, Fore, Style
+from zipfile import ZipFile
+import shutil
 
-def change_name(directory, extension):
-    files = os.listdir(directory)
+filetypes = [".jar"]
+cd = os.chdir
+ls = os.listdir
+
+def changename(directory):
+    files = []
+    os.chdir(directory)
+    for file in ls():
+        if os.path.isfile(file):
+            files.append(file)
+    if not len(files) > 0:
+        print()
+        print( "No supported files in directory you've provided, returning to menu...")
+        print()
+        return
     for file in files:
-        with ZipFile(f"{directory}/{file}", "r") as jar:
-            jar_dir = file.strip(".jar")
-            jar.extractall(path=f"{directory}/{jar_dir}")
-        with open(f"{directory}/{jar_dir}/META-INF/MANIFEST.MF", "r") as jar:
-            for line in jar:
-                if line.startswith("MIDlet-Name:"):
-                    name = line.split(":")[1].strip()
-                if line.startswith("MIDlet-Version:"):
-                    version = line.split(":")[1].strip()
-        shutil.rmtree(f"{directory}/{jar_dir}")
-        try:
-            os.rename(f"{directory}/{file}", f"{directory}/{name} v{version}.jar")
-        except FileExistsError:
-            print("The same file exists")
-            continue
-        time.sleep(20)
+        if file.endswith(".jar"):
+            with ZipFile(file, "r") as zObject:
+                zObject.extractall(directory + "_u")
+            with open(f"{directory}_u/META-INF/MANIFEST.MF", "r") as f:
+                for line in f:
+                    if line.startswith("MIDlet-Name:"):
+                        display_name = line.split(":")[1].strip()
+                    if line.startswith("MIDlet-Version:"):
+                        version = line.split(":")[1].strip()
+            shutil.rmtree(directory + "_u")
+            os.rename(file, f"{display_name} v{version}.jar")
+    print(" ")
+    print(f" {Fore.CYAN}Done!{Style.RESET_ALL}")
+    print(" ")
+    input(" Press any key to return...")
     return
