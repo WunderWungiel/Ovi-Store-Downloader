@@ -12,6 +12,7 @@ from search import search
 from cdn import cdn
 from help_f import help_f
 from changename import changename
+from dmremover import dmremover
 from colorama import init, Fore, Style
 #Supported extensions
 
@@ -19,11 +20,14 @@ sup_extensions = ["sis", "sisx", "sis.dm", "sisx.dm", "deb", "jar", "wgz", "gif.
 
 #Supported arguments
 
-functions = ["--cdn", "--id", "--help", "--search", "--about", "--changename"]
+functions = ["--cdn", "--id", "--help", "--search", "--about", "--changename", "--removedm"]
 
 def clean():
     os.system('clear||cls')
     return
+
+ls = os.listdir
+
 def about():
     clean()
     print(""" 
@@ -108,7 +112,38 @@ if len(sys.argv) > 1:
         print(f" Picking *.{ext} extension.")
         print()
         cdn(ext)
-    
+    elif function == "--removedm":
+        if not len(sys.argv) >2:
+            print(" Second argument should be filename / directory.")
+            print()
+            sys.exit(1)
+        argument = str(sys.argv[2]               )
+        if os.path.isfile(argument):
+            if not argument.endswith(".dm"):
+                print(" Filename doesn't end with .dm - try again!")
+                print()
+                sys.exit(1)
+            function = "file"
+        elif os.path.isdir(argument):
+            isdm = False
+            for filename in ls(argument):
+                if filename.endswith(".dm"):
+                    isdm = True
+                    break
+            if not isdm:
+                print(" No .dm files in specified directory - try again!")
+                print()
+                sys.exit(1)
+            function = "dir"
+        elif not os.path.exists(argument):
+            print(" No such file or directory.")
+            print()
+            sys.exit(1)
+        else:
+            print(" Unkown error. Argument may not be a regular file or directory. Try again")
+            print()
+            sys.exit(1)
+        dmremover(argument, function)
     #Search argument
     elif function == "--about":
         about()
@@ -165,8 +200,8 @@ else:
         print(" #########                                                            #########")
         print(" #########     1) Download app(s) using ID  |  2) Search for apps     #########")
         print(" #########     3) Download apps with specific extension               #########")
-        print(" #########     4) Name Changer  |  5) Print help  |  6) About         #########")
-        print(" #########     7) Exit                                                #########")
+        print(" #########     4) Name Changer  |  5) DM remover 6) Print help        #########")
+        print(" #########     7) About  |  8) Exit                                  #########")
         print(" #########                                                            #########")
         print(" ##############################################################################")
         print()
@@ -177,10 +212,10 @@ else:
             if re.search("\d+", function):
                 function = int(function)
             else:
-                print(" Option should be number from 1 - 6!\n")
+                print(" Option should be number from 1 - 8!\n")
 
                 continue
-            if function not in range(1, 8):
+            if function not in range(1, 9):
                 print("\n Wrong option! Type correct number.\n")
                 continue
             else:
@@ -279,12 +314,48 @@ else:
                 break
             changename(directory)
         elif function == 5:
+            print(" Picking DM remover function. Type directory with files, which names need to be changed OR name / path of ONE file.")
+            print()
+            while True:
+                argument = input(" ")
+                if os.path.isfile(argument):
+                    if not argument.endswith(".dm"):
+                        print()
+                        print(" Filename doesn't end with .dm - try again!")
+                        print()
+                        continue
+                    function = "file"
+                elif os.path.isdir(argument):
+                    isdm = False
+                    for filename in ls(argument):
+                        if filename.endswith(".dm"):
+                            isdm = True
+                            break
+                    if not isdm:
+                        print()
+                        print(" No .dm files in specified directory - try again!")
+                        print()
+                        continue
+                    function = "dir"
+                elif not os.path.exists(argument):
+                    print()
+                    print(" No such file or directory.")
+                    print()
+                    continue
+                else:
+                    print()
+                    print(" Unkown error. Argument may not be a regular file or directory. Try again")
+                    print()
+                    continue
+                break
+            dmremover(argument, function)
+        elif function == 6:
             #print help
             help_f()
-        elif function == 6:
+        elif function == 7:
             about()
             input(" Press any key to return...")
-        elif function == 7:
+        elif function == 8:
             #close script
             sys.exit(0)
         #clear console window
