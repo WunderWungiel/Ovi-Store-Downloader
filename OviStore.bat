@@ -1,3 +1,3 @@
 @echo off
-py "OviStore.py" || python "OviStore.py"
+py "OviStore.py"
 pause
