@@ -24,7 +24,7 @@ sup_extensions = ["sis", "sisx", "sis.dm", "sisx.dm", "deb", "jar", "wgz", "gif.
 functions = ["--cdn", "--id", "--help", "--search", "--about", "--changename", "--removedm", "--filename"]
 
 def clean():
-    subprocess.call('cls' if os.name == "nt" else "clear")
+    subprocess.call('cls' if os.name == "nt" else "clear", shell=True)
     return
 
 ls = os.listdir
@@ -376,7 +376,7 @@ else:
             help_f()
         elif function == 8:
             about()
-            input(" Press any key to return...")
+            input(" Press Enter to return...")
         elif function == 9:
             #close script
             sys.exit(0)

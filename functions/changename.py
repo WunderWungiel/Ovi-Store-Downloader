@@ -33,5 +33,5 @@ def changename(directory):
     print(" ")
     print(f" {Fore.CYAN}Done!{Style.RESET_ALL}")
     print(" ")
-    input(" Press any key to return...")
+    input(" Press Enter to return...")
     return

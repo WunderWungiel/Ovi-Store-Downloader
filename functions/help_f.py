@@ -26,7 +26,7 @@ def help_f():
  Wayback Machine often refuses connection after many requests. You will be notified about such case with a bunch of errors, you need to retry then.
  Sorry :(""")
         print()
-        input(" Press any key to return...")
+        input(" Press Enter to return...")
         return
     except KeyboardInterrupt:
         return

@@ -22,7 +22,7 @@ def filename(file):
         if not len(apps) > 0:
             print(f" {Fore.RED}Nothing found{Style.RESET_ALL}")
             print()
-            input(" Press any key to return...")
+            input(" Press Enter to return...")
             return
         else:
             link = apps[0]
@@ -34,7 +34,7 @@ def filename(file):
         if os.path.exists(file):
             print(f" {file} already exists, skipping...")
             print()
-            input(" Press any key to return...")
+            input(" Press Enter to return...")
             return
         with open(file, "wb") as f:
             for data in file_content.iter_content(block_size):
@@ -46,5 +46,5 @@ def filename(file):
     except KeyboardInterrupt:
         print(f" {Fore.RED}KeyboardInterrupt{Style.RESET_ALL}")
         sys.exit(0) 
-    input(" Press any key to return...")
+    input(" Press Enter to return...")
     return

@@ -34,7 +34,7 @@ def search(name, extensions):
             if not len(apps2) > 0:
                 print(f" {Fore.RED}Nothing found{Style.RESET_ALL}")
                 print()
-                input(" Press any key to return...")
+                input(" Press Enter to return...")
                 return
         print(f" {Fore.CYAN}Found:{Style.RESET_ALL}")
         print()
@@ -88,7 +88,7 @@ def search(name, extensions):
                     print()
                 print(f" {Fore.LIGHTGREEN_EX}Downloaded everything!{Style.RESET_ALL}")
                 print()
-                input(" Press any key to return...")
+                input(" Press Enter to return...")
                 return
             todl = ask.split(", ")
             todl = list(set(todl))
@@ -133,5 +133,5 @@ def search(name, extensions):
         print(f" {Fore.RED}KeyboardInterrupt, exiting.{Style.RESET_ALL}")
         print()
         sys.exit(1) 
-    input(" Press any key to return...")
+    input(" Press Enter to return...")
     return

@@ -41,5 +41,5 @@ def id_f(arg1, arg2):
             sys.exit(0)
         except:
             continue 
-    input(" Press any key to return...")
+    input(" Press Enter to return...")
     return
