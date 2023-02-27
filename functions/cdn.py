@@ -4,15 +4,19 @@ import re
 import time
 from colorama import init, Fore, Style
 
+headers = {
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; rv:91.0) Gecko/20100101 Firefox/91.0'
+}
+
+database_path = os.path.dirname(os.path.abspath(__file__)) + "/../database"
+
 def cdn(ext):
     try:
-        url = "http://wunderwungiel.pl/Symbian/OviDatabase.txt"
-        headers = {'User-Agent': 'Mozilla/5.0 (Linux; Android 11; SM-T725) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.5249.126 Safari/537.36 OPR/72.5.3767.69342'}
-        response = requests.get(url, headers=headers, allow_redirects=True)
-        content = response.content.decode("utf-8")
-        links = re.findall(f"(https\:\/\/d\.ovi\.com\/p\/g\/store.*\.{ext}.*)\s+", content)
+        with open(database_path + "/OviDatabase.txt", "r") as database:
+            content = database.read()
+        links = re.findall(f"(https://d\.ovi\.com/p/g/store.*\.{ext}.*)\s+", content)
         for link in links:
-            link = f"http://web.archive.org/web/20150215225841/{link}"
+            link = f"http://web.archive.org/web/20150215225841id_/{link}"
             link_resp = requests.get(link, headers=headers, allow_redirects=True)
             filename = re.search("store/\d+\/(.*?)\?", link)
             filename = filename.group(1)

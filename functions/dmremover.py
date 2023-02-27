@@ -1,6 +1,7 @@
 import os
 from colorama import init, Style, Fore
 
+
 def dmremover(argument, function):
     if function == "file":
         if argument.endswith(".sisx.dm") or argument.endswith(".sis.dm"):
