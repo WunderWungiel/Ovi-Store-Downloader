@@ -1,7 +1,6 @@
 import os
 from colorama import init, Style, Fore
 
-
 def dmremover(argument, function):
     if function == "file":
         if argument.endswith(".sisx.dm") or argument.endswith(".sis.dm"):
@@ -39,9 +38,9 @@ def dmremover(argument, function):
             if start != -1 and end != -1:
                 with open(argument, "wb") as f_out:
                     f_out.write(content[start+len(b"\x2D\x2D\x62\x6F\x75\x6E\x64\x61\x72\x79\x2D\x31\x0D\x0A\x43\x6F\x6E\x74\x65\x6E\x74\x2D\x54\x79\x70\x65\x3A\x20\x76\x69\x64\x65\x6F\x2F\x6D\x70\x34\x0D\x0A\x43\x6F\x6E\x74\x65\x6E\x74\x2D\x54\x72\x61\x6E\x73\x66\x65\x72\x2D\x45\x6E\x63\x6F\x64\x69\x6E\x67\x3A\x20\x62\x69\x6E\x61\x72\x79\x0D\x0A\x0D\x0A"):end])
-
         new_file = argument.replace(".dm", "")
         os.rename(argument, new_file)
+        print("{}'s DM removed!".format(argument))
     elif function == "dir":
         for file in os.listdir(argument):
             file = f"{argument}/{file}"
@@ -53,7 +52,9 @@ def dmremover(argument, function):
                 if start != -1 and end != -1:
                     with open(file, "wb") as f_out:
                         f_out.write(content[start+len(b"\x2D\x2D\x62\x6F\x75\x6E\x64\x61\x72\x79\x2D\x31\x0D\x0A\x43\x6F\x6E\x74\x65\x6E\x74\x2D\x54\x79\x70\x65\x3A\x20\x78\x2D\x65\x70\x6F\x63\x2F\x78\x2D\x73\x69\x73\x78\x2D\x61\x70\x70\x0D\x0A\x43\x6F\x6E\x74\x65\x6E\x74\x2D\x54\x72\x61\x6E\x73\x66\x65\x72\x2D\x45\x6E\x63\x6F\x64\x69\x6E\x67\x3A\x20\x62\x69\x6E\x61\x72\x79\x0D\x0A\x0D\x0A"):end])
-
+                new_file = file.replace(".dm", "")
+                os.rename(file, new_file)
+                print(" {}'s DM removed!".format(file))
             elif file.endswith(".gif.dm"):
                 with open(file, "rb") as f_in:
                     content = f_in.read()
@@ -62,7 +63,9 @@ def dmremover(argument, function):
                 if start != -1 and end != -1:
                     with open(file, "wb") as f_out:
                         f_out.write(content[start+len(b"\x2D\x2D\x62\x6F\x75\x6E\x64\x61\x72\x79\x2D\x31\x0D\x0A\x43\x6F\x6E\x74\x65\x6E\x74\x2D\x54\x79\x70\x65\x3A\x20\x69\x6D\x61\x67\x65\x2F\x67\x69\x66\x0D\x0A\x43\x6F\x6E\x74\x65\x6E\x74\x2D\x54\x72\x61\x6E\x73\x66\x65\x72\x2D\x45\x6E\x63\x6F\x64\x69\x6E\x67\x3A\x20\x62\x69\x6E\x61\x72\x79\x0D\x0A\x0D\x0A"):end])
-        
+                new_file = file.replace(".dm", "")
+                os.rename(file, new_file)
+                print(" {}'s DM removed!".format(file))
             elif file.endswith(".3gp.dm"):
                 with open(file, "rb") as f_in:
                     content = f_in.read()
@@ -71,7 +74,9 @@ def dmremover(argument, function):
                 if start != -1 and end != -1:
                     with open(file, "wb") as f_out:
                         f_out.write(content[start+len(b"\x2D\x2D\x62\x6F\x75\x6E\x64\x61\x72\x79\x2D\x31\x0D\x0A\x43\x6F\x6E\x74\x65\x6E\x74\x2D\x54\x79\x70\x65\x3A\x20\x76\x69\x64\x65\x6F\x2F\x33\x67\x70\x70\x0D\x0A\x43\x6F\x6E\x74\x65\x6E\x74\x2D\x54\x72\x61\x6E\x73\x66\x65\x72\x2D\x45\x6E\x63\x6F\x64\x69\x6E\x67\x3A\x20\x62\x69\x6E\x61\x72\x79\x0D\x0A\x0D\x0A"):end])
-        
+                new_file = file.replace(".dm", "")
+                os.rename(file, new_file)
+                print(" {}'s DM removed!".format(file))
             elif file.endswith(".mp4.dm"):
                 with open(file, "rb") as f_in:
                     content = f_in.read()
@@ -80,8 +85,9 @@ def dmremover(argument, function):
                 if start != -1 and end != -1:
                     with open(file, "wb") as f_out:
                         f_out.write(content[start+len(b"\x2D\x2D\x62\x6F\x75\x6E\x64\x61\x72\x79\x2D\x31\x0D\x0A\x43\x6F\x6E\x74\x65\x6E\x74\x2D\x54\x79\x70\x65\x3A\x20\x76\x69\x64\x65\x6F\x2F\x6D\x70\x34\x0D\x0A\x43\x6F\x6E\x74\x65\x6E\x74\x2D\x54\x72\x61\x6E\x73\x66\x65\x72\x2D\x45\x6E\x63\x6F\x64\x69\x6E\x67\x3A\x20\x62\x69\x6E\x61\x72\x79\x0D\x0A\x0D\x0A"):end])
-            new_file = file.replace(".dm", "")
-            os.rename(file, new_file)
+                new_file = file.replace(".dm", "")
+                os.rename(file, new_file)
+                print(" {}'s DM removed!".format(file))
     print(" ")
     print(f" {Fore.CYAN}Done!{Style.RESET_ALL}")
     print(" ")

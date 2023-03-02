@@ -1,8 +1,9 @@
 from colorama import init, Fore, Style
+from .clean import clean
 
 def help_f():
-    try:
-        print(f""" {Fore.CYAN}This script works using Wayback Machine APIs and use its snapshots.{Style.RESET_ALL}
+    clean()
+    print(f""" {Fore.CYAN}This script works using Wayback Machine APIs and use its snapshots.{Style.RESET_ALL}
 
  Available commands:
 
@@ -25,8 +26,6 @@ def help_f():
 
  Wayback Machine often refuses connection after many requests. You will be notified about such case with a bunch of errors, you need to retry then.
  Sorry :(""")
-        print()
-        input(" Press Enter to return...")
-        return
-    except KeyboardInterrupt:
-        return
+    print()
+    input(" Press Enter to return...")
+    return

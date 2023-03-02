@@ -12,7 +12,7 @@ headers = {
 def id_f(arg1, arg2):
     for i in range(arg1, arg2):
         try:
-            url = f"http://web.archive.org/web/20150128233153id_/http://store.ovi.com/content/{i}/download"
+            url = f"http://web.archive.org/web/20150000000000id_/http://store.ovi.com/content/{i}/download"
             response = requests.get(url, allow_redirects=True, stream=True)
             if response.status_code == 200 and len(response.history) > 0 and "d.ovi" in response.url:
                 content_disposition = response.headers.get("Content-Disposition")
@@ -36,6 +36,10 @@ def id_f(arg1, arg2):
                     progress_bar.close()
                     print()
                     print(f" Saved {filename} with ID {i}\n")
+            else:
+                print()
+                print(" Wayback didn't redirect, so the app wasn't archived.")
+                continue
         except KeyboardInterrupt:
             print(f" {Fore.RED}KeyboardInterrupt{Style.RESET_ALL}")
             sys.exit(0)
