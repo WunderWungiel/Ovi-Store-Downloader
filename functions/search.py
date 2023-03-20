@@ -14,8 +14,12 @@ database_path = os.path.dirname(os.path.abspath(__file__)) + "/../database"
 
 def search(name, extensions):
     try:
-        with open(database_path + "/OviDatabase.txt", "r") as database:
-            content = database.read()
+        if not extensions or "jar" in extensions:
+            with open(database_path + "/OviDatabase.txt", "r") as database:
+                content = database.read()
+        elif extensions and "jar" not in extensions:
+            with open(database_path + "/OviDatabaseLite.txt", "r") as database:
+                content = database.read()
         with open(database_path + "/MaemoOviDatabase.txt", "r") as database:
             content2 = database.read()
         time.sleep(1)
@@ -23,12 +27,12 @@ def search(name, extensions):
             name = name.replace(" ", ".*")
         apps = []
         mapps = []
-        if extensions == None:
-            apps += re.findall(f"(?i)https://d\.ovi\.com/p/g/store/\d+/({name}.*)\?", content)
+        if not extensions:
+            apps += re.findall(f"(?i)/\d+/({name}.*)\?", content)
             mapps += re.findall(f"(?i)http://archive.org/download/maemo-fremantle-ovi/maemo-fremantle-ovi.tar/maemo-fremantle-ovi/mirror/downloads.maemo.nokia.com/fremantle1.2/ovi/({name}.*\..*)\n", content2)
         else:
             for ext in extensions:
-                apps += re.findall(f"(?i)https://d\.ovi\.com/p/g/store/\d+/({name}.*\.{ext})\?", content)
+                apps += re.findall(f"(?i)/\d+/({name}.*\.{ext})\?", content)
                 mapps += re.findall(f"(?i)http://archive.org/download/maemo-fremantle-ovi/maemo-fremantle-ovi.tar/maemo-fremantle-ovi/mirror/downloads.maemo.nokia.com/fremantle1.2/ovi/({name}.*\.{ext})\n", content2)
         apps_nums = {}
         mapps_nums = {}
@@ -53,7 +57,9 @@ def search(name, extensions):
         mapps_links = {}
         all_links = {}
         for num, app in apps_nums.items():
-            links = re.findall(f"(?i)(https://d\.ovi\.com/p/g/store.*{app}.*)\s+", content)
+            links = re.findall(f"(?i)(/.*{app}.*)\s+", content)
+            for i, link in enumerate(links):
+                links[i] = "https://d.ovi.com/p/g/store" + link
             link = links[0]
             link = f"http://web.archive.org/web/20150215225841id_/{link}"
             apps_links.update({app : link})

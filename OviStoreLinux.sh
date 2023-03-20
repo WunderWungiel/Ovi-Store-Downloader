@@ -6,11 +6,11 @@ then
     exit 1
 fi
 
-if [ -e "/usr/bin/konsole" ]; then
+if [ -f "/usr/bin/konsole" ]; then
     /usr/bin/konsole -e python3 OviStore.py
-elif [ -e "/bin/xterm" ]; then
+elif [ -f "/bin/xterm" ]; then
     /usr/bin/xterm -e python3 OviStore.py
-elif [ -e "/usr/bin/gnome-terminal" ]; then
+elif [ -f "/usr/bin/gnome-terminal" ]; then
     /usr/bin/gnome-terminal -- python3 OviStore.py
 else
     echo "I didn't find Terminal emulator."
