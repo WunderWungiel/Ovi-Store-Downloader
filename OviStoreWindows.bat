@@ -1,3 +1,3 @@
 @echo off
-start powershell py "OviStore.py"
+start powershell py "main.py"
 pause
