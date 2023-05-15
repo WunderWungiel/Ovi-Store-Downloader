@@ -7,19 +7,19 @@ import sys
 try:
     import colorama
 except ImportError:
-    sys.stderr.write(" \"colorama\" module not found, install it with pip.")
+    sys.stderr.write(" \"colorama\" module not found, install it with pip.\n")
     sys.exit(1)
 
 try:
     import requests
 except ImportError:
-    sys.stderr.write(" \"requests\" module not found, install it with pip.")
+    sys.stderr.write(" \"requests\" module not found, install it with pip.\n")
     sys.exit(1)
 
 try:
     import tqdm
 except ImportError:
-    sys.stderr.write(" \"tqdm\" module not found, install it with pip.")
+    sys.stderr.write(" \"tqdm\" module not found, install it with pip.\n")
     sys.exit(1)
 
 from colorama import init, Fore, Style
